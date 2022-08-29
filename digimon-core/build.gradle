@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'digimon.core'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    // JUnit
+    implementation 'org.hamcrest:hamcrest:2.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    implementation 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    // Mock
+    testImplementation 'org.mockito:mockito-core:4.6.1'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.6.1'
+}
+
+test {
+    useJUnitPlatform()
+}
