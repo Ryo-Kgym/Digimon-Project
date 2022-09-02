@@ -79,3 +79,4 @@ fabric.properties
 
 /digimon-core/gradle/
 /digimon-core/.gradle/
+/digimon-core/target/
