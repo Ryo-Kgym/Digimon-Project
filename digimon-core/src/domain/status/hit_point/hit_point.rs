@@ -1,3 +1,5 @@
+use crate::domain::fight::damage::Damage;
+
 const MIN_VALUE: i32 = 0;
 
 #[derive(Debug, PartialEq)]
@@ -15,10 +17,19 @@ impl HitPoint {
             min: MIN_VALUE,
         }
     }
+
+    pub fn damaged(self, damage: Damage) -> Self  {
+        HitPoint {
+            value: (self.value - damage.value).max(0),
+            max: self.max,
+            min: MIN_VALUE,
+        }
+    }
 }
 
 #[cfg(test)]
 mod tests {
+    use crate::domain::fight::damage::Damage;
     use crate::HitPoint;
 
     #[test]
@@ -26,6 +37,39 @@ mod tests {
         let actual = HitPoint::build(100);
         let expected = HitPoint {
             value: 100,
+            max: 100,
+            min: 0,
+        };
+
+        assert_eq!(actual, expected)
+    }
+
+    #[test]
+    fn test_damaged_rest() {
+        let hit_point = HitPoint::build(100);
+        let damage = Damage {
+            value: 20,
+        };
+        let actual = hit_point.damaged(damage);
+
+        let expected = HitPoint {
+            value: 80,
+            max: 100,
+            min: 0,
+        };
+
+        assert_eq!(actual, expected)
+    }
+    #[test]
+    fn test_damaged_non_rest() {
+        let hit_point = HitPoint::build(100);
+        let damage = Damage {
+            value: 200,
+        };
+        let actual = hit_point.damaged(damage);
+
+        let expected = HitPoint {
+            value: 0,
             max: 100,
             min: 0,
         };
