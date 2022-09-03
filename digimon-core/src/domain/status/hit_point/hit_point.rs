@@ -1,4 +1,5 @@
 use crate::domain::fight::damage::Damage;
+use crate::domain::fight::recovery::Recovery;
 
 const MIN_VALUE: i32 = 0;
 
@@ -18,9 +19,17 @@ impl HitPoint {
         }
     }
 
-    pub fn damaged(self, damage: Damage) -> Self  {
+    pub fn damaged(self, damage: Damage) -> Self {
         HitPoint {
-            value: (self.value - damage.value).max(0),
+            value: (self.value - damage.value).max(MIN_VALUE),
+            max: self.max,
+            min: MIN_VALUE,
+        }
+    }
+
+    pub fn recovered(self, recovery: Recovery) -> Self {
+        HitPoint {
+            value: (self.value + recovery.value).min(self.max),
             max: self.max,
             min: MIN_VALUE,
         }
@@ -30,6 +39,7 @@ impl HitPoint {
 #[cfg(test)]
 mod tests {
     use crate::domain::fight::damage::Damage;
+    use crate::domain::fight::recovery::Recovery;
     use crate::HitPoint;
 
     #[test]
@@ -45,7 +55,7 @@ mod tests {
     }
 
     #[test]
-    fn test_damaged_rest() {
+    fn test_damaged_greater_than_min() {
         let hit_point = HitPoint::build(100);
         let damage = Damage {
             value: 20,
@@ -60,8 +70,9 @@ mod tests {
 
         assert_eq!(actual, expected)
     }
+
     #[test]
-    fn test_damaged_non_rest() {
+    fn test_damaged_less_than_min() {
         let hit_point = HitPoint::build(100);
         let damage = Damage {
             value: 200,
@@ -70,6 +81,48 @@ mod tests {
 
         let expected = HitPoint {
             value: 0,
+            max: 100,
+            min: 0,
+        };
+
+        assert_eq!(actual, expected)
+    }
+
+    #[test]
+    fn test_recovered_less_than_max() {
+        let hit_point = HitPoint {
+            value: 50,
+            max: 100,
+            min: 0,
+        };
+        let recovery = Recovery {
+            value: 20,
+        };
+
+        let actual = hit_point.recovered(recovery);
+        let expected = HitPoint {
+            value: 70,
+            max: 100,
+            min: 0,
+        };
+
+        assert_eq!(actual, expected)
+    }
+
+    #[test]
+    fn test_recovered_greater_than_max() {
+        let hit_point = HitPoint {
+            value: 50,
+            max: 100,
+            min: 0,
+        };
+        let recovery = Recovery {
+            value: 80,
+        };
+
+        let actual = hit_point.recovered(recovery);
+        let expected = HitPoint {
+            value: 100,
             max: 100,
             min: 0,
         };
