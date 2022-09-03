@@ -1,4 +1,4 @@
-use crate::domain::status::hit_point::HitPoint;
+use crate::domain::status::hit_point::hit_point::HitPoint;
 
 mod domain;
 
