@@ -1,8 +1,10 @@
 use crate::digimon::core::domain::fight::damage::damage::Damage;
+use crate::digimon::core::domain::fight::effect::effect::Effects;
 
 #[derive(Debug, PartialEq)]
 pub struct Attack {
     value: i32,
+    effects: Effects,
 }
 
 impl Attack {
@@ -16,12 +18,14 @@ impl Attack {
 #[cfg(test)]
 mod tests {
     use crate::digimon::core::domain::fight::damage::damage::Damage;
+    use crate::digimon::core::domain::fight::effect::effect::Effects;
     use crate::digimon::core::domain::status::attack::attack::Attack;
 
     #[test]
     fn test_to_damage() {
         let actual = Attack {
-            value: 100
+            value: 100,
+            effects: Effects::build(),
         }.to_damage();
 
         let expected = Damage {
