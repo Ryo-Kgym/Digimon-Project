@@ -1,4 +1,4 @@
-use crate::digimon::core::domain::status::attribute::attribute::Attribute::{DATA, VACCINE, VIRUS};
+use crate::digimon::core::domain::model::status::attribute::attribute::Attribute::{DATA, VACCINE, VIRUS};
 
 #[derive(Debug, PartialEq)]
 pub enum Attribute {
@@ -27,7 +27,7 @@ impl Attribute {
 
 #[cfg(test)]
 mod tests {
-    use crate::digimon::core::domain::status::attribute::attribute::Attribute::{DATA, VACCINE, VIRUS};
+    use crate::digimon::core::domain::model::status::attribute::attribute::Attribute::{DATA, VACCINE, VIRUS};
 
     #[test]
     fn test_advantage() {

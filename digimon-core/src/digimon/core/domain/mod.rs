@@ -1,3 +1,1 @@
-pub mod status;
-pub mod fight;
-pub mod character;
+pub mod model;

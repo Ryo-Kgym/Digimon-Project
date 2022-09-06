@@ -1,5 +1,5 @@
-use crate::digimon::core::domain::status::attack::attack::Attack;
-use crate::digimon::core::domain::status::attribute::attribute::Attribute;
+use crate::digimon::core::domain::model::status::attack::attack::Attack;
+use crate::digimon::core::domain::model::status::attribute::attribute::Attribute;
 use crate::HitPoint;
 
 #[derive(Debug, PartialEq)]

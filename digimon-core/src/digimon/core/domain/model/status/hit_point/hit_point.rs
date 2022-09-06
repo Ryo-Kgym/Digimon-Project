@@ -1,5 +1,5 @@
-use crate::digimon::core::domain::fight::damage::damage::Damage;
-use crate::digimon::core::domain::fight::recovery::recovery::Recovery;
+use crate::digimon::core::domain::model::fight::damage::damage::Damage;
+use crate::digimon::core::domain::model::fight::recovery::recovery::Recovery;
 
 const MIN_VALUE: i32 = 0;
 
@@ -38,8 +38,8 @@ impl HitPoint {
 
 #[cfg(test)]
 mod tests {
-    use crate::digimon::core::domain::fight::damage::damage::Damage;
-    use crate::digimon::core::domain::fight::recovery::recovery::Recovery;
+    use crate::digimon::core::domain::model::fight::damage::damage::Damage;
+    use crate::digimon::core::domain::model::fight::recovery::recovery::Recovery;
     use crate::HitPoint;
 
     #[test]
