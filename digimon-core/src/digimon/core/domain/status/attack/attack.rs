@@ -1,4 +1,4 @@
-use crate::domain::fight::damage::Damage;
+use crate::digimon::core::domain::fight::damage::damage::Damage;
 
 #[derive(Debug, PartialEq)]
 pub struct Attack {
@@ -15,8 +15,8 @@ impl Attack {
 
 #[cfg(test)]
 mod tests {
-    use crate::domain::fight::damage::Damage;
-    use crate::domain::status::attack::attack::Attack;
+    use crate::digimon::core::domain::fight::damage::damage::Damage;
+    use crate::digimon::core::domain::status::attack::attack::Attack;
 
     #[test]
     fn test_to_damage() {

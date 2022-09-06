@@ -1,6 +1,6 @@
-use crate::domain::status::hit_point::hit_point::HitPoint;
+use crate::digimon::core::domain::status::hit_point::hit_point::HitPoint;
 
-mod domain;
+mod digimon;
 
 fn main() {
     let hit_point = HitPoint::build(100);
