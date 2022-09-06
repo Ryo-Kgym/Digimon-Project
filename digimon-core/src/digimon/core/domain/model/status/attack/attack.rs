@@ -3,8 +3,8 @@ use crate::digimon::core::domain::model::fight::effect::effect::Effects;
 
 #[derive(Debug, PartialEq)]
 pub struct Attack {
-    value: i32,
-    effects: Effects,
+    pub value: i32,
+    pub effects: Effects,
 }
 
 impl Attack {

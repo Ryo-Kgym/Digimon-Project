@@ -5,9 +5,9 @@ const MIN_VALUE: i32 = 0;
 
 #[derive(Debug, PartialEq)]
 pub struct HitPoint {
-    value: i32,
-    max: i32,
-    min: i32,
+    pub value: i32,
+    pub max: i32,
+    pub min: i32,
 }
 
 impl HitPoint {
