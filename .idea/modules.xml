@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Digimon-Project.iml" filepath="$PROJECT_DIR$/.idea/Digimon-Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/digimon-card-front.iml" filepath="$PROJECT_DIR$/digimon-card-front.iml" />
       <module fileurl="file://$PROJECT_DIR$/digimon-core/digimon-core.iml" filepath="$PROJECT_DIR$/digimon-core/digimon-core.iml" />
     </modules>
   </component>
