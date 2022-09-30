@@ -79,3 +79,4 @@ fabric.properties
 
 /digimon-core/target/
 /digimon-card-front/node_modules/
+/digimon-card-api/target/
