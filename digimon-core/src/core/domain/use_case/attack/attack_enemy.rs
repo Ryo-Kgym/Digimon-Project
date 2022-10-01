@@ -44,7 +44,7 @@ mod tests {
         let input = AttackEnemyInput {
             my_attack: Attack {
                 value: 50,
-                effects: Effects::build(),
+                effects: Effects::empty(),
             },
             my_attribute: VACCINE,
             enemy_hit_point: HitPoint::build(200),

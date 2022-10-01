@@ -16,7 +16,7 @@ impl DamageBuilder {
     pub fn new() -> Self {
         DamageBuilder {
             value: 0,
-            effects: Effects::build(),
+            effects: Effects::empty(),
         }
     }
 
@@ -64,7 +64,7 @@ mod tests {
     fn test_damage_builder() {
         let attack = Attack {
             value: 200,
-            effects: Effects::build(),
+            effects: Effects::empty(),
         };
 
         let actual = DamageBuilder::new()

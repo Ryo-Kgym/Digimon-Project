@@ -43,7 +43,7 @@ mod tests {
         let input = BeAttackedInput {
             enemy_attack: Attack {
                 value: 50,
-                effects: Effects::build(),
+                effects: Effects::empty(),
             },
             enemy_attribute: VIRUS,
             my_hit_point: HitPoint::build(100),

@@ -25,7 +25,7 @@ mod tests {
     fn test_to_damage() {
         let actual = Attack {
             value: 100,
-            effects: Effects::build(),
+            effects: Effects::empty(),
         }.to_damage();
 
         let expected = Damage {

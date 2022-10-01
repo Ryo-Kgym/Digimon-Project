@@ -16,7 +16,7 @@ pub struct Effects {
 }
 
 impl Effects {
-    pub fn build() -> Self {
+    pub fn empty() -> Self {
         let effects = Vec::new();
 
         Effects {
@@ -41,8 +41,8 @@ mod tests {
     use crate::core::domain::model::status::attribute::Attribute::{DATA, VACCINE, VIRUS};
 
     #[test]
-    fn test_build() {
-        let actual = Effects::build();
+    fn test_empty() {
+        let actual = Effects::empty();
         let expected = Effects {
             effects: Vec::new(),
         };
