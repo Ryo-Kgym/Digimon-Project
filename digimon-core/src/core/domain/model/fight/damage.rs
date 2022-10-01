@@ -39,13 +39,17 @@ impl DamageBuilder {
 
         for effect in &self.effects.effects {
             match effect.effect_type {
-                AttackMultiply(multiply) => value *= multiply
+                AttackMultiply(magnification) => value = Self::calc_value(value, magnification)
             }
         }
 
         return Damage {
             value,
         };
+    }
+
+    fn calc_value(value: i32, magnification: f64) -> i32 {
+        (value as f64 * magnification) as i32
     }
 }
 

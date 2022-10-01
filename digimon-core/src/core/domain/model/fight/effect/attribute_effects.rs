@@ -5,12 +5,12 @@ use crate::core::domain::model::status::attribute::Attribute;
 impl Effects {
     pub fn of(my_attribute: Attribute,
               enemy_attribute: Attribute) -> Self {
-        let mut magnification: i32 = 1;
+        let mut magnification = 1.0;
 
         if my_attribute.advantage() == enemy_attribute {
-            magnification = 2;
+            magnification = 2.0;
         } else if my_attribute.disadvantage() == enemy_attribute {
-            magnification = 1 / 2;
+            magnification = 0.5;
         }
 
         Effects {
@@ -34,7 +34,7 @@ mod tests {
         );
         let expected = Effects {
             effects: vec![Effect {
-                effect_type: AttackMultiply(2),
+                effect_type: AttackMultiply(2.0),
             }]
         };
 
@@ -48,7 +48,7 @@ mod tests {
         );
         let expected = Effects {
             effects: vec![Effect {
-                effect_type: AttackMultiply(1 / 2),
+                effect_type: AttackMultiply(0.5),
             }]
         };
 
@@ -62,7 +62,7 @@ mod tests {
         );
         let expected = Effects {
             effects: vec![Effect {
-                effect_type: AttackMultiply(1),
+                effect_type: AttackMultiply(1.0),
             }]
         };
 

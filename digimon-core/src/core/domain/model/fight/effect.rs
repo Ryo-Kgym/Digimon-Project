@@ -2,7 +2,7 @@ pub(crate) mod attribute_effects;
 
 #[derive(Debug, PartialEq)]
 pub enum EffectType {
-    AttackMultiply(i32),
+    AttackMultiply(f64),
 }
 
 #[derive(Debug, PartialEq)]
@@ -57,10 +57,10 @@ mod tests {
         let expected = Effects {
             effects: vec![
                 Effect {
-                    effect_type: AttackMultiply(2),
+                    effect_type: AttackMultiply(2.0),
                 },
                 Effect {
-                    effect_type: AttackMultiply(1 / 2),
+                    effect_type: AttackMultiply(0.5),
                 },
             ],
         };
