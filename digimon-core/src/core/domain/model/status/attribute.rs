@@ -8,7 +8,7 @@ pub enum Attribute {
 }
 
 impl Attribute {
-    pub fn advantage(self) -> Attribute {
+    pub fn advantage(&self) -> Attribute {
         match self {
             VACCINE => VIRUS,
             DATA => VACCINE,
@@ -16,7 +16,7 @@ impl Attribute {
         }
     }
 
-    pub fn disadvantage(self) -> Attribute {
+    pub fn disadvantage(&self) -> Attribute {
         match self {
             VACCINE => DATA,
             DATA => VIRUS,
