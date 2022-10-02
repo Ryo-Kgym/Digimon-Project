@@ -79,5 +79,5 @@ fabric.properties
 
 /digimon-core_tmp/target/
 /digimon-card-front/node_modules/
-/digimon-card-api/target/
-/digimon-card-core/target/
+/digimon_card_api/target/
+/digimon_card_api/digimon_card_core/target/

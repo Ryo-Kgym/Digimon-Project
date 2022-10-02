@@ -1,6 +1,6 @@
 use crate::core::domain::model::status::attack::Attack;
 use crate::core::domain::model::status::attribute::Attribute;
-use crate::HitPoint;
+use crate::core::domain::model::status::hit_point::HitPoint;
 
 #[derive(Debug, PartialEq)]
 pub struct Digimon {

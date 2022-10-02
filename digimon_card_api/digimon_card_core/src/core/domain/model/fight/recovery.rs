@@ -1,5 +1,5 @@
 
 #[derive(Debug, PartialEq)]
 pub struct Recovery {
-    pub(crate) value: i32,
+    pub value: i32,
 }

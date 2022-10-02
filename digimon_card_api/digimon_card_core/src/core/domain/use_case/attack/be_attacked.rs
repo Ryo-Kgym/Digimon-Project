@@ -2,7 +2,7 @@ use crate::core::domain::model::fight::damage::DamageBuilder;
 use crate::core::domain::model::fight::effect::Effects;
 use crate::core::domain::model::status::attack::Attack;
 use crate::core::domain::model::status::attribute::Attribute;
-use crate::HitPoint;
+use crate::core::domain::model::status::hit_point::HitPoint;
 
 pub fn be_attacked(input: BeAttackedInput) -> BeAttackedOutput {
     let attribute_effects = Effects::of(input.enemy_attribute, input.my_attribute);
@@ -35,8 +35,8 @@ mod tests {
     use crate::core::domain::model::fight::effect::Effects;
     use crate::core::domain::model::status::attack::Attack;
     use crate::core::domain::model::status::attribute::Attribute::{VACCINE, VIRUS};
+    use crate::core::domain::model::status::hit_point::HitPoint;
     use crate::core::domain::use_case::attack::be_attacked::{be_attacked, BeAttackedInput, BeAttackedOutput};
-    use crate::HitPoint;
 
     #[test]
     fn test_be_attacked() {

@@ -554,15 +554,20 @@ dependencies = [
 ]
 
 [[package]]
-name = "digimon-card-api"
+name = "digimon_card_api"
 version = "0.1.0"
 dependencies = [
  "actix-rt",
  "actix-web",
  "async-graphql",
  "async-graphql-actix-web",
+ "digimon_card_core",
  "once_cell",
 ]
+
+[[package]]
+name = "digimon_card_core"
+version = "0.1.0"
 
 [[package]]
 name = "encoding_rs"
