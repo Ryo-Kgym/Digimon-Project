@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "digimon-card-core"
+name = "digimon_card_core"
 version = "0.1.0"
