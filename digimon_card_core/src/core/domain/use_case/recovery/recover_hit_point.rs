@@ -11,13 +11,13 @@ pub fn recover_hit_point(input: RecoverHitPointInput) -> RecoverHitPointOutput {
 
 #[derive(Debug, PartialEq)]
 pub struct RecoverHitPointInput {
-    hit_point: HitPoint,
-    recovery: Recovery,
+    pub hit_point: HitPoint,
+    pub recovery: Recovery,
 }
 
 #[derive(Debug, PartialEq)]
 pub struct RecoverHitPointOutput {
-    hit_point: HitPoint,
+    pub hit_point: HitPoint,
 }
 
 #[cfg(test)]

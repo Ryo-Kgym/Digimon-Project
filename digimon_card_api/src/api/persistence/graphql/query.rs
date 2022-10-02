@@ -1,11 +1,12 @@
 use async_graphql::Object;
 
-use crate::photo::PHOTOS;
+use crate::api::sample::photo::PHOTOS;
 
-pub struct MyQuery;
+pub struct DigimonQuery;
+
 
 #[Object]
-impl MyQuery {
+impl DigimonQuery {
     async fn total_photos(&self) -> usize {
         PHOTOS.lock().unwrap().len()
     }
