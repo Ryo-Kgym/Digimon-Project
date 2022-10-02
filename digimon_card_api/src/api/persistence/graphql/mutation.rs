@@ -1,15 +1,30 @@
-use async_graphql::Object;
+use async_graphql::{Object, SimpleObject};
 
-use crate::api::sample::photo::{Photo, PHOTOS};
+use digimon_card_core::{HitPoint, recover_hit_point, RecoverHitPointInput, Recovery};
 
 pub struct DigimonMutation;
 
 #[Object]
 impl DigimonMutation {
+    async fn recover_hit_point(&self, item_value: i32) -> HitPointViewModel {
+        let h = recover_hit_point(RecoverHitPointInput {
+            hit_point: HitPoint {
+                value: 50,
+                min: 0,
+                max: 200,
+            },
+            recovery: Recovery {
+                value: item_value,
+            },
+        });
 
-    async fn post_photo(&self, name: String, description: String) -> bool {
-        let photo = Photo { name, description };
-        PHOTOS.lock().unwrap().push(photo);
-        true
+        HitPointViewModel {
+            value: h.hit_point.value
+        }
     }
+}
+
+#[derive(SimpleObject, Clone)]
+pub struct HitPointViewModel {
+    pub value: i32,
 }
