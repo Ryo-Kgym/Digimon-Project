@@ -1,5 +1,5 @@
 use crate::core::domain::model::fight::recovery::Recovery;
-use crate::HitPoint;
+use crate::core::domain::model::status::hit_point::HitPoint;
 
 pub fn recover_hit_point(input: RecoverHitPointInput) -> RecoverHitPointOutput {
     let recovered = input.hit_point.recovered(input.recovery);
@@ -23,8 +23,8 @@ pub struct RecoverHitPointOutput {
 #[cfg(test)]
 mod tests {
     use crate::core::domain::model::fight::recovery::Recovery;
+    use crate::core::domain::model::status::hit_point::HitPoint;
     use crate::core::domain::use_case::recovery::recover_hit_point::{recover_hit_point, RecoverHitPointInput, RecoverHitPointOutput};
-    use crate::HitPoint;
 
     #[test]
     fn test_recover_hit_point() {
