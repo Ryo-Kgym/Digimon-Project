@@ -1,7 +1,3 @@
-//! Actix Web juniper example
-//!
-//! A simple example integrating juniper in Actix Web
-
 use std::{io, sync::Arc};
 
 use actix_cors::Cors;
@@ -17,15 +13,13 @@ use crate::api::config::graphql::schema::{create_schema, Schema};
 
 mod api;
 
-/// GraphiQL playground UI
 #[get("/graphiql")]
 async fn graphql_playground() -> impl Responder {
     Html(graphiql_source("/graphql", None))
 }
 
-/// GraphQL endpoint
 #[route("/graphql", method = "GET", method = "POST")]
-async fn graphql(st: web::Data<Schema>, data: web::Json<GraphQLRequest>) -> impl Responder {
+async fn graphql(st: Data<Schema>, data: web::Json<GraphQLRequest>) -> impl Responder {
     let user = data.execute(&st, &()).await;
     HttpResponse::Ok().json(user)
 }
@@ -34,19 +28,16 @@ async fn graphql(st: web::Data<Schema>, data: web::Json<GraphQLRequest>) -> impl
 async fn main() -> io::Result<()> {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
-    // Create Juniper mutation
     let schema = Arc::new(create_schema());
 
     log::info!("starting HTTP server on port 8080");
     log::info!("GraphiQL playground: http://localhost:8080/graphiql");
 
-    // Start HTTP server
     HttpServer::new(move || {
         App::new()
             .app_data(Data::from(schema.clone()))
             .service(graphql)
             .service(graphql_playground)
-            // the graphiql UI requires CORS to be enabled
             .wrap(Cors::permissive())
             .wrap(middleware::Logger::default())
     })
@@ -54,4 +45,41 @@ async fn main() -> io::Result<()> {
         .bind(("127.0.0.1", 8080))?
         .run()
         .await
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::create_schema;
+
+    #[test]
+    fn main() {
+        let result = create_schema().as_schema_language();
+
+        let expected =
+"\
+type QueryRoot {
+  dummy(id: String!): String!
+}
+
+type MutationRoot {
+  \"My Digimon attacks the enemy.\"
+  attackEnemy(request: AttackEnemyRequest!): AttackEnemyResponse!
+}
+
+input AttackEnemyRequest {
+  myAttackValue: Int!
+  enemyHitPointValue: Int!
+}
+
+type AttackEnemyResponse {
+  enemyHitPoint: Int!
+}
+
+schema {
+  query: QueryRoot
+  mutation: MutationRoot
+}
+";
+        assert_eq!(result, expected);
+    }
 }
