@@ -34,7 +34,7 @@ async fn graphql(st: web::Data<Schema>, data: web::Json<GraphQLRequest>) -> impl
 async fn main() -> io::Result<()> {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
-    // Create Juniper schema
+    // Create Juniper mutation
     let schema = Arc::new(create_schema());
 
     log::info!("starting HTTP server on port 8080");
