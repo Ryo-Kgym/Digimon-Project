@@ -1,1 +1,1 @@
-pub(crate) mod graphql;
+pub mod graphql;

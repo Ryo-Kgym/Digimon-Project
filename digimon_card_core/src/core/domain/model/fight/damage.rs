@@ -4,7 +4,7 @@ use crate::core::domain::model::status::attack::Attack;
 
 #[derive(Debug, PartialEq)]
 pub struct Damage {
-    pub(crate) value: i32,
+    pub value: i32,
 }
 
 pub struct DamageBuilder {

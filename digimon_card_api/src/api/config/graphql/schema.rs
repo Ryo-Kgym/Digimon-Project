@@ -1,6 +1,4 @@
-use juniper::{EmptySubscription, FieldResult, RootNode};
-
-use crate::api::dto::graphql::human::{Episode, Human, NewHuman};
+use juniper::{EmptySubscription, RootNode};
 
 pub struct MutationRoot;
 

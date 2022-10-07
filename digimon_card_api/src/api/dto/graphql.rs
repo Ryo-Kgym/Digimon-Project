@@ -1,1 +1,2 @@
-pub(crate) mod human;
+pub mod human;
+pub mod attack_enemy;

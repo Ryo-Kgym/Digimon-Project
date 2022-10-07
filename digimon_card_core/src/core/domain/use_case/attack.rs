@@ -1,2 +1,2 @@
-pub(crate) mod attack_enemy;
-pub(crate) mod be_attacked;
+pub mod attack_enemy;
+pub mod be_attacked;
