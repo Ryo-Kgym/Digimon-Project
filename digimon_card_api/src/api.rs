@@ -1,3 +1,1 @@
-pub mod config;
-pub mod sample;
-pub mod persistence;
+pub(crate) mod config;

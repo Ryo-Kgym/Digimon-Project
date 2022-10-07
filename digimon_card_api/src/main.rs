@@ -6,16 +6,16 @@ use std::{io, sync::Arc};
 
 use actix_cors::Cors;
 use actix_web::{
-    get, middleware, route,
-    web::{self, Data},
-    App, HttpResponse, HttpServer, Responder,
+    App, get, HttpResponse,
+    HttpServer,
+    middleware, Responder, route, web::{self, Data},
 };
 use actix_web_lab::respond::Html;
 use juniper::http::{graphiql::graphiql_source, GraphQLRequest};
 
-mod schema;
+use crate::api::config::graphql::schema::{create_schema, Schema};
 
-use crate::schema::{create_schema, Schema};
+mod api;
 
 /// GraphiQL playground UI
 #[get("/graphiql")]
@@ -50,8 +50,8 @@ async fn main() -> io::Result<()> {
             .wrap(Cors::permissive())
             .wrap(middleware::Logger::default())
     })
-    .workers(2)
-    .bind(("127.0.0.1", 8080))?
-    .run()
-    .await
+        .workers(2)
+        .bind(("127.0.0.1", 8080))?
+        .run()
+        .await
 }
