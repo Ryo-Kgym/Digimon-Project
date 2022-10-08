@@ -1,1 +1,1 @@
-pub(crate) mod domain;
+pub mod domain;

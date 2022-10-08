@@ -1,1 +1,1 @@
-pub(crate) mod digimon;
+pub mod digimon;

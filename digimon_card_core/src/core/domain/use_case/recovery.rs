@@ -1,1 +1,1 @@
-pub(crate) mod recover_hit_point;
+pub mod recover_hit_point;

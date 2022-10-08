@@ -20,15 +20,15 @@ pub fn attack_enemy(input: AttackEnemyInput) -> AttackEnemyOutput {
 
 #[derive(Debug, PartialEq)]
 pub struct AttackEnemyInput {
-    my_attack: Attack,
-    my_attribute: Attribute,
-    enemy_hit_point: HitPoint,
-    enemy_attribute: Attribute,
+    pub my_attack: Attack,
+    pub my_attribute: Attribute,
+    pub enemy_hit_point: HitPoint,
+    pub enemy_attribute: Attribute,
 }
 
 #[derive(Debug, PartialEq)]
 pub struct AttackEnemyOutput {
-    enemy_hit_point: HitPoint,
+    pub enemy_hit_point: HitPoint,
 }
 
 #[cfg(test)]

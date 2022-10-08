@@ -1,3 +1,2 @@
 pub mod config;
-pub mod sample;
-pub mod persistence;
+pub mod dto;
