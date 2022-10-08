@@ -65,7 +65,7 @@ type MutationRoot {
   \"My Digimon attacks the enemy.\"
   attackEnemy(request: AttackEnemyRequest!): HitPoint!
   \"My Digimon is attacked by the enemy.\"
-  beAttacked(request: BeAttackedRequest!): BeAttackedResponse!
+  beAttacked(request: BeAttackedRequest!): HitPoint!
 }
 
 input BeAttackedRequest {
@@ -80,10 +80,6 @@ type HitPoint {
 input AttackEnemyRequest {
   myAttackValue: Int!
   enemyHitPointValue: Int!
-}
-
-type BeAttackedResponse {
-  myHitPointValue: Int!
 }
 
 schema {

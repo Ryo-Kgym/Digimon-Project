@@ -1,13 +1,15 @@
-use juniper::{
-    GraphQLInputObject,
-    GraphQLObject,
-};
+use juniper::GraphQLInputObject;
 
 use digimon_card_core::core::domain::model::fight::effect::Effects;
 use digimon_card_core::core::domain::model::status::attack::Attack;
 use digimon_card_core::core::domain::model::status::attribute::Attribute;
 use digimon_card_core::core::domain::model::status::hit_point::HitPoint;
-use digimon_card_core::core::domain::use_case::attack::be_attacked::{BeAttackedInput, BeAttackedOutput};
+use digimon_card_core::core::domain::use_case::attack::be_attacked::{
+    BeAttackedInput,
+    BeAttackedOutput,
+};
+
+use crate::api::dto::graphql::status::hit_point::HitPoint as HitPointGraphql;
 
 #[derive(GraphQLInputObject)]
 pub struct BeAttackedRequest {
@@ -33,17 +35,9 @@ impl BeAttackedRequest {
     }
 }
 
-#[derive(GraphQLObject)]
-#[derive(Debug, PartialEq)]
-pub struct BeAttackedResponse {
-    pub my_hit_point_value: i32,
-}
-
-impl BeAttackedResponse {
-    pub fn of(source: BeAttackedOutput) -> Self {
-        BeAttackedResponse {
-            my_hit_point_value: source.my_hit_point.value
-        }
+pub fn to_hit_point(output: BeAttackedOutput) -> HitPointGraphql {
+    HitPointGraphql {
+        value: *&output.my_hit_point.value
     }
 }
 
@@ -55,7 +49,8 @@ mod tests {
     use digimon_card_core::core::domain::model::status::hit_point::HitPoint;
     use digimon_card_core::core::domain::use_case::attack::be_attacked::{BeAttackedInput, BeAttackedOutput};
 
-    use crate::api::dto::graphql::fight::be_attacked::{BeAttackedRequest, BeAttackedResponse};
+    use crate::api::dto::graphql::fight::be_attacked::{BeAttackedRequest, to_hit_point};
+    use crate::api::dto::graphql::status::hit_point::HitPoint as HitPointGraphql;
 
     #[test]
     fn test_to_be_attacked_input() {
@@ -84,7 +79,7 @@ mod tests {
     }
 
     #[test]
-    fn test_of() {
+    fn test_to_hit_point() {
         let source = BeAttackedOutput {
             my_hit_point: HitPoint {
                 value: 50,
@@ -93,10 +88,10 @@ mod tests {
             }
         };
 
-        let actual = BeAttackedResponse::of(source);
+        let actual = to_hit_point(source);
 
-        let expected = BeAttackedResponse {
-            my_hit_point_value: 50
+        let expected = HitPointGraphql {
+            value: 50
         };
 
         assert_eq!(actual, expected);
