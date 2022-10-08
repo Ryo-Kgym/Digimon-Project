@@ -63,7 +63,18 @@ type QueryRoot {
 
 type MutationRoot {
   \"My Digimon attacks the enemy.\"
-  attackEnemy(request: AttackEnemyRequest!): AttackEnemyResponse!
+  attackEnemy(request: AttackEnemyRequest!): HitPoint!
+  \"My Digimon is attacked by the enemy.\"
+  beAttacked(request: BeAttackedRequest!): BeAttackedResponse!
+}
+
+input BeAttackedRequest {
+  myHitPointValue: Int!
+  enemyAttackValue: Int!
+}
+
+type HitPoint {
+  value: Int!
 }
 
 input AttackEnemyRequest {
@@ -71,8 +82,8 @@ input AttackEnemyRequest {
   enemyHitPointValue: Int!
 }
 
-type AttackEnemyResponse {
-  enemyHitPoint: Int!
+type BeAttackedResponse {
+  myHitPointValue: Int!
 }
 
 schema {

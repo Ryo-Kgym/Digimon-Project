@@ -55,7 +55,7 @@ mod tests {
     use digimon_card_core::core::domain::model::status::hit_point::HitPoint;
     use digimon_card_core::core::domain::use_case::attack::be_attacked::{BeAttackedInput, BeAttackedOutput};
 
-    use crate::api::dto::graphql::be_attacked::{BeAttackedRequest, BeAttackedResponse};
+    use crate::api::dto::graphql::fight::be_attacked::{BeAttackedRequest, BeAttackedResponse};
 
     #[test]
     fn test_to_be_attacked_input() {

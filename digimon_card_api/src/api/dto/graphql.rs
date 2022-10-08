@@ -1,2 +1,2 @@
-pub mod attack_enemy;
-pub mod be_attacked;
+pub mod fight;
+pub mod status;
