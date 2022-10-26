@@ -6,12 +6,12 @@ use crate::core::domain::model::status::hit_point::HitPoint;
 
 #[derive(Debug, PartialEq)]
 pub struct Digimon {
-    name: String,
-    attribute: Attribute,
-    hit_point: HitPoint,
-    primary_attack: Attack,
-    secondary_attack: Attack,
-    tertiary_attack: Attack,
+    pub name: String,
+    pub attribute: Attribute,
+    pub hit_point: HitPoint,
+    pub primary_attack: Attack,
+    pub secondary_attack: Attack,
+    pub tertiary_attack: Attack,
 }
 
 impl Digimon {
