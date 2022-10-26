@@ -40,7 +40,6 @@ impl DamageBuilder {
         for effect in &self.effects.effects {
             match effect.effect_type {
                 AttackMultiply(magnification) => value = Self::calc_value(value, magnification),
-                // TODO RecoveryType
                 _ => {}
             }
         }
@@ -63,7 +62,7 @@ mod tests {
     use crate::core::domain::model::status::attribute::Attribute::{DATA, VACCINE, VIRUS};
 
     #[test]
-    fn test_damage_builder() {
+    fn test_damage_builder_attack_multiply() {
         let attack = Attack {
             value: 200,
             effects: Effects::empty(),
@@ -77,6 +76,25 @@ mod tests {
 
         let expected = Damage {
             value: 800,
+        };
+
+        assert_eq!(actual, expected)
+    }
+
+    #[test]
+    fn test_damage_builder_recovery() {
+        let attack = Attack {
+            value: 200,
+            effects: Effects::empty(),
+        };
+
+        let actual = DamageBuilder::new()
+            .attack(attack)
+            .effects(Effects::of(VIRUS, DATA))
+            .build();
+
+        let expected = Damage {
+            value: 400,
         };
 
         assert_eq!(actual, expected)
