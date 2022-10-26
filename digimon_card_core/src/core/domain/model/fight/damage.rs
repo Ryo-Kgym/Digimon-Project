@@ -1,4 +1,4 @@
-use crate::core::domain::model::fight::effect::Effects;
+use crate::core::domain::model::fight::effect::{Effects};
 use crate::core::domain::model::fight::effect::EffectType::AttackMultiply;
 use crate::core::domain::model::status::attack::Attack;
 
@@ -39,7 +39,9 @@ impl DamageBuilder {
 
         for effect in &self.effects.effects {
             match effect.effect_type {
-                AttackMultiply(magnification) => value = Self::calc_value(value, magnification)
+                AttackMultiply(magnification) => value = Self::calc_value(value, magnification),
+                // TODO RecoveryType
+                _ => {}
             }
         }
 
