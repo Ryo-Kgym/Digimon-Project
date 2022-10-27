@@ -22,6 +22,7 @@ impl Digimon {
         let mut tertiary_attack = self.tertiary_attack;
 
         for effect in effects.effects {
+            // TODO ストラテジーパターンで分離
             match effect.effect_type {
                 EffectType::AttackMultiply(magnification) => {
                     primary_attack = primary_attack.multiply(magnification);
@@ -32,6 +33,12 @@ impl Digimon {
                 EffectType::RecoveryType(value) => {
                     let recovery = Recovery { value };
                     hit_point = hit_point.recovered(recovery);
+                }
+
+                EffectType::AttackPlus(value) => {
+                    primary_attack = primary_attack.add(value);
+                    secondary_attack = secondary_attack.add(value);
+                    tertiary_attack = tertiary_attack.add(value);
                 }
             }
         }
@@ -51,11 +58,13 @@ impl Digimon {
 mod tests {
     use crate::core::domain::model::character::digimon::Digimon;
     use crate::core::domain::model::fight::effect::{Effect, Effects};
-    use crate::core::domain::model::fight::effect::EffectType::{AttackMultiply, RecoveryType};
+    use crate::core::domain::model::fight::effect::EffectType::{AttackMultiply, AttackPlus, RecoveryType};
     use crate::core::domain::model::status::attack::Attack;
     use crate::core::domain::model::status::attribute::Attribute;
     use crate::core::domain::model::status::hit_point::HitPoint;
 
+    // AttackMultiply
+    // RecoveryType
     #[test]
     fn test_obtain_effects() {
         let digimon = Digimon {
@@ -90,6 +99,46 @@ mod tests {
             },
             primary_attack: Attack { value: 400, effects: Effects::empty() },
             secondary_attack: Attack { value: 200, effects: Effects::empty() },
+            tertiary_attack: Attack { value: 100, effects: Effects::empty() },
+        };
+
+        assert_eq!(actual, expected)
+    }
+
+    // AttackPlus
+    #[test]
+    fn test_obtain_effects_2() {
+        let digimon = Digimon {
+            name: "アグモン".to_string(),
+            attribute: Attribute::VACCINE,
+            hit_point: HitPoint {
+                value: 300,
+                max: 600,
+                min: 0,
+            },
+            primary_attack: Attack { value: 200, effects: Effects::empty() },
+            secondary_attack: Attack { value: 100, effects: Effects::empty() },
+            tertiary_attack: Attack { value: 50, effects: Effects::empty() },
+        };
+
+        let effects = Effects {
+            effects: vec![
+                Effect { effect_type: AttackPlus(50) },
+            ]
+        };
+
+        let actual = digimon.obtain_effects(effects);
+
+        let expected = Digimon {
+            name: "アグモン".to_string(),
+            attribute: Attribute::VACCINE,
+            hit_point: HitPoint {
+                value: 300,
+                max: 600,
+                min: 0,
+            },
+            primary_attack: Attack { value: 250, effects: Effects::empty() },
+            secondary_attack: Attack { value: 150, effects: Effects::empty() },
             tertiary_attack: Attack { value: 100, effects: Effects::empty() },
         };
 

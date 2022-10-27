@@ -40,6 +40,7 @@ impl DamageBuilder {
             match effect.effect_type {
                 EffectType::AttackMultiply(magnification) => value = Self::calc_value(value, magnification),
                 EffectType::AttackPlus(add_value) => value = value + add_value,
+                _ => {}
             }
         }
 
