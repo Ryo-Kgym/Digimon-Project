@@ -3,6 +3,7 @@ pub mod attribute_effects;
 #[derive(Debug, PartialEq)]
 pub enum EffectType {
     AttackMultiply(f64),
+    AttackPlus(i32),
 }
 
 #[derive(Debug, PartialEq)]

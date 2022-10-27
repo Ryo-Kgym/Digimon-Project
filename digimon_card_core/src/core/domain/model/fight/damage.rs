@@ -1,5 +1,4 @@
-use crate::core::domain::model::fight::effect::Effects;
-use crate::core::domain::model::fight::effect::EffectType::AttackMultiply;
+use crate::core::domain::model::fight::effect::{Effects, EffectType};
 use crate::core::domain::model::status::attack::Attack;
 
 #[derive(Debug, PartialEq)]
@@ -39,7 +38,8 @@ impl DamageBuilder {
 
         for effect in &self.effects.effects {
             match effect.effect_type {
-                AttackMultiply(magnification) => value = Self::calc_value(value, magnification)
+                EffectType::AttackMultiply(magnification) => value = Self::calc_value(value, magnification),
+                EffectType::AttackPlus(add_value) => value = value + add_value,
             }
         }
 
@@ -56,7 +56,8 @@ impl DamageBuilder {
 #[cfg(test)]
 mod tests {
     use crate::core::domain::model::fight::damage::{Damage, DamageBuilder};
-    use crate::core::domain::model::fight::effect::Effects;
+    use crate::core::domain::model::fight::effect::{Effect, Effects};
+    use crate::core::domain::model::fight::effect::EffectType::AttackPlus;
     use crate::core::domain::model::status::attack::Attack;
     use crate::core::domain::model::status::attribute::Attribute::{DATA, VACCINE, VIRUS};
 
@@ -70,11 +71,12 @@ mod tests {
         let actual = DamageBuilder::new()
             .attack(attack)
             .effects(Effects::of(VIRUS, DATA))
+            .effects(Effects { effects: vec![Effect { effect_type: AttackPlus(20) }] })
             .effects(Effects::of(VACCINE, VIRUS))
             .build();
 
         let expected = Damage {
-            value: 800,
+            value: 840,
         };
 
         assert_eq!(actual, expected)
