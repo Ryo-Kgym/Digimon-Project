@@ -1,5 +1,6 @@
 pub mod attribute_effects;
 pub mod recovery_effects;
+pub mod attack_plus_effects;
 
 #[derive(Debug, PartialEq)]
 pub enum EffectType {
