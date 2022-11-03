@@ -4,7 +4,8 @@ pub mod recovery_effects;
 #[derive(Debug, PartialEq)]
 pub enum EffectType {
     AttackMultiply(f64),
-    RecoveryType(i32)
+    RecoveryType(i32),
+    AttackPlus(i32),
 }
 
 #[derive(Debug, PartialEq)]
