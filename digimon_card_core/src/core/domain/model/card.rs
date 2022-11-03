@@ -11,8 +11,7 @@ impl Card {
 	pub fn get_effects(&self) -> Effects {
 		match self {
 			Card::RecoveryFloppy => { Effects::of_recovery_effects(300) }
-			// TODO
-			Card::AttackPlugin => { Effects::empty() }
+			Card::AttackPlugin => { Effects::of_attack_plus(100) }
 		}
 	}
 }
@@ -31,7 +30,7 @@ mod tests {
 
 		let expected_list = vec![
 			Effects::of_recovery_effects(300),
-			Effects::empty(),
+			Effects::of_attack_plus(100),
 		];
 
 		for i in 0..actual_list.len() {
