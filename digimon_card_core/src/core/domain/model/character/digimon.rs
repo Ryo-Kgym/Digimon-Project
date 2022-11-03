@@ -1,4 +1,4 @@
-use crate::core::domain::model::character::digimon::obtain_effects::allocate;
+use crate::core::domain::model::character::digimon::obtain_effects::allocate_effects;
 use crate::core::domain::model::fight::effect::Effects;
 use crate::core::domain::model::status::attack::Attack;
 use crate::core::domain::model::status::attribute::Attribute;
@@ -18,7 +18,7 @@ pub struct Digimon {
 
 impl Digimon {
     pub fn obtain_effects(self, effects: Effects) -> Self {
-        allocate(self, effects)
+        allocate_effects(self, effects)
     }
 }
 

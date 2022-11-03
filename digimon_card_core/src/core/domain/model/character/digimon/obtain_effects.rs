@@ -8,27 +8,41 @@ pub mod attack_multiply;
 pub mod attack_plus;
 pub mod recovery_type;
 
+pub struct EffectsObtainer<T: ObtainEffects> {
+    obtain_effects: T,
+}
+
+impl<T: ObtainEffects> EffectsObtainer<T> {
+    fn new(obtain_effects: T) -> Self {
+        Self { obtain_effects }
+    }
+
+    fn apply(self, digimon: Digimon, value: usize) -> Digimon {
+        self.obtain_effects.apply(digimon, value)
+    }
+}
+
 pub trait ObtainEffects {
     fn apply(self, digimon: Digimon, value: usize) -> Digimon;
 }
 
-pub fn allocate(source: Digimon, effects: Effects) -> Digimon {
+pub fn allocate_effects(source: Digimon, effects: Effects) -> Digimon {
     let mut digimon = source;
 
     for effect in effects.effects {
         match effect.effect_type {
             EffectType::AttackMultiply(value) => {
-                digimon = AttackMultiplyObtainEffects
+                digimon = EffectsObtainer::new(AttackMultiplyObtainEffects)
                     .apply(digimon, value as usize)
             }
 
             EffectType::RecoveryType(value) => {
-                digimon = RecoveryTypeObtainEffects
+                digimon = EffectsObtainer::new(RecoveryTypeObtainEffects)
                     .apply(digimon, value as usize)
             }
 
             EffectType::AttackPlus(value) => {
-                digimon = AttackPlusObtainEffects
+                digimon = EffectsObtainer::new(AttackPlusObtainEffects)
                     .apply(digimon, value as usize)
             }
         }
