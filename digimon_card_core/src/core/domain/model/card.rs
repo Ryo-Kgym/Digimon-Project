@@ -1,5 +1,7 @@
 use crate::core::domain::model::fight::effect::Effects;
 
+pub mod deck;
+
 #[derive(Debug, PartialEq)]
 pub enum Card {
 	// アイテム
