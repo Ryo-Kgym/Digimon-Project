@@ -1,5 +1,6 @@
 use crate::core::domain::model::character::digimon::Digimon;
-use crate::core::domain::model::character::digimon::level3_vaccine::{fetch_agu_mon_parameter};
+use crate::core::domain::model::character::digimon::level3_vaccine::fetch_agu_mon_parameter;
+use crate::core::domain::model::character::digimon::level3_virus::fetch_pico_devil_mon_parameter;
 use crate::core::domain::model::fight::effect::Effects;
 
 pub mod deck;
@@ -8,6 +9,7 @@ pub mod deck;
 pub enum Card {
 	// デジモン
 	AguMon,                           // アグモン
+	PicoDevilMon,                     // ピコデビモン
 	// アイテム
 	RecoveryFloppy,                   // 回復フロッピー
 	AttackPlugin,                     // 攻撃プラグイン
@@ -25,6 +27,7 @@ impl Card {
     pub fn get_digimon(&self) -> Option<Digimon> {
         match self {
             Card::AguMon => { Some(fetch_agu_mon_parameter()) }
+            Card::PicoDevilMon => { Some(fetch_pico_devil_mon_parameter()) }
             _ => { None }
         }
     }
@@ -34,17 +37,20 @@ impl Card {
 mod tests {
     use crate::core::domain::model::card::Card;
     use crate::core::domain::model::character::digimon::level3_vaccine::fetch_agu_mon_parameter;
+    use crate::core::domain::model::character::digimon::level3_virus::fetch_pico_devil_mon_parameter;
     use crate::core::domain::model::fight::effect::Effects;
 
     #[test]
     fn test_get_effects() {
         let actual_list = vec![
             Card::AguMon,
+            Card::PicoDevilMon,
             Card::RecoveryFloppy,
             Card::AttackPlugin,
         ];
 
         let expected_list = vec![
+            Effects::empty(),
             Effects::empty(),
             Effects::of_recovery_effects(300),
             Effects::of_attack_plus(100),
@@ -59,12 +65,14 @@ mod tests {
     fn test_get_digimon() {
         let actual_list = vec![
             Card::AguMon,
+            Card::PicoDevilMon,
             Card::RecoveryFloppy,
             Card::AttackPlugin,
         ];
 
         let expected_list = vec![
             Some(fetch_agu_mon_parameter()),
+            Some(fetch_pico_devil_mon_parameter()),
             None,
             None,
         ];

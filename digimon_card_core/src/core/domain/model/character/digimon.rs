@@ -6,6 +6,7 @@ use crate::core::domain::model::status::hit_point::HitPoint;
 
 pub mod obtain_effects;
 pub mod level3_vaccine;
+pub mod level3_virus;
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Digimon {
