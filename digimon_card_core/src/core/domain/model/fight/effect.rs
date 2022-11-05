@@ -2,19 +2,19 @@ pub mod attribute_effects;
 pub mod recovery_effects;
 pub mod attack_plus_effects;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum EffectType {
     AttackMultiply(f64),
     RecoveryType(i32),
     AttackPlus(i32),
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Effect {
     pub effect_type: EffectType,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Effects {
     pub effects: Vec<Effect>,
 }

@@ -5,8 +5,11 @@ use crate::core::domain::model::status::attribute::Attribute;
 use crate::core::domain::model::status::hit_point::HitPoint;
 
 pub mod obtain_effects;
+pub mod level3_vaccine;
+pub mod level3_data;
+pub mod level3_virus;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Digimon {
     pub name: String,
     pub attribute: Attribute,
@@ -43,9 +46,9 @@ mod tests {
                 max: 600,
                 min: 0,
             },
-            primary_attack: Attack::new_no_effects(200),
-            secondary_attack: Attack::new_no_effects(100),
-            tertiary_attack: Attack::new_no_effects(50),
+            primary_attack: Attack::value_of(200),
+            secondary_attack: Attack::value_of(100),
+            tertiary_attack: Attack::value_of(50),
         };
 
         let effects = Effects {
@@ -66,9 +69,9 @@ mod tests {
                 max: 600,
                 min: 0,
             },
-            primary_attack: Attack::new_no_effects(400),
-            secondary_attack: Attack::new_no_effects(200),
-            tertiary_attack: Attack::new_no_effects(100),
+            primary_attack: Attack::value_of(400),
+            secondary_attack: Attack::value_of(200),
+            tertiary_attack: Attack::value_of(100),
         };
 
         assert_eq!(actual, expected)

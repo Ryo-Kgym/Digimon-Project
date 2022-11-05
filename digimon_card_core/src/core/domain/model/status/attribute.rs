@@ -1,6 +1,6 @@
 use crate::core::domain::model::status::attribute::Attribute::{DATA, VACCINE, VIRUS};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Attribute {
     VACCINE,
     DATA,

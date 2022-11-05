@@ -1,13 +1,13 @@
 use crate::core::domain::model::fight::effect::Effects;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Attack {
     pub value: i32,
     pub effects: Effects,
 }
 
 impl Attack {
-    pub fn new_no_effects(value: i32) -> Self {
+    pub fn value_of(value: i32) -> Self {
         Attack {
             value,
             effects: Effects::empty()
@@ -35,8 +35,8 @@ mod tests {
     use crate::core::domain::model::status::attack::Attack;
 
     #[test]
-    fn test_new() {
-        let actual = Attack::new_no_effects(300);
+    fn test_value_of() {
+        let actual = Attack::value_of(300);
         let expected = Attack {
             value: 300,
             effects: Effects::empty(),

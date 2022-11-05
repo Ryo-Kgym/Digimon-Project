@@ -3,7 +3,7 @@ use crate::core::domain::model::fight::recovery::Recovery;
 
 const MIN_VALUE: i32 = 0;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct HitPoint {
     pub value: i32,
     pub max: i32,
@@ -11,7 +11,7 @@ pub struct HitPoint {
 }
 
 impl HitPoint {
-    pub fn build(max: i32) -> Self {
+    pub fn value_of(max: i32) -> Self {
         HitPoint {
             value: max,
             max,
@@ -43,8 +43,8 @@ mod tests {
     use crate::core::domain::model::status::hit_point::HitPoint;
 
     #[test]
-    fn test_hit_point_build() {
-        let actual = HitPoint::build(100);
+    fn test_value_of() {
+        let actual = HitPoint::value_of(100);
         let expected = HitPoint {
             value: 100,
             max: 100,
@@ -56,7 +56,7 @@ mod tests {
 
     #[test]
     fn test_damaged_greater_than_min() {
-        let hit_point = HitPoint::build(100);
+        let hit_point = HitPoint::value_of(100);
         let damage = Damage {
             value: 20,
         };
@@ -73,7 +73,7 @@ mod tests {
 
     #[test]
     fn test_damaged_less_than_min() {
-        let hit_point = HitPoint::build(100);
+        let hit_point = HitPoint::value_of(100);
         let damage = Damage {
             value: 200,
         };
