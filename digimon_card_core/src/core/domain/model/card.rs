@@ -1,6 +1,8 @@
 use crate::core::domain::model::fight::effect::Effects;
 
-#[derive(Debug, PartialEq)]
+pub mod deck;
+
+#[derive(Debug, PartialEq, Clone)]
 pub enum Card {
 	// アイテム
 	RecoveryFloppy,                   // 回復フロッピー

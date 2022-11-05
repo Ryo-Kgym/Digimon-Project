@@ -7,6 +7,13 @@ pub struct Attack {
 }
 
 impl Attack {
+    pub fn new_no_effects(value: i32) -> Self {
+        Attack {
+            value,
+            effects: Effects::empty()
+        }
+    }
+
     pub fn add(self, value: i32) -> Self {
         Attack {
             value: self.value + value,
@@ -26,6 +33,17 @@ impl Attack {
 mod tests {
     use crate::core::domain::model::fight::effect::Effects;
     use crate::core::domain::model::status::attack::Attack;
+
+    #[test]
+    fn test_new() {
+        let actual = Attack::new_no_effects(300);
+        let expected = Attack {
+            value: 300,
+            effects: Effects::empty(),
+        };
+
+        assert_eq!(actual, expected)
+    }
 
     #[test]
     fn test_add() {

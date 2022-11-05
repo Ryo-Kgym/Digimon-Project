@@ -43,9 +43,9 @@ mod tests {
                 max: 600,
                 min: 0,
             },
-            primary_attack: Attack { value: 200, effects: Effects::empty() },
-            secondary_attack: Attack { value: 100, effects: Effects::empty() },
-            tertiary_attack: Attack { value: 50, effects: Effects::empty() },
+            primary_attack: Attack::new_no_effects(200),
+            secondary_attack: Attack::new_no_effects(100),
+            tertiary_attack: Attack::new_no_effects(50),
         };
 
         let effects = Effects {
@@ -66,9 +66,9 @@ mod tests {
                 max: 600,
                 min: 0,
             },
-            primary_attack: Attack { value: 400, effects: Effects::empty() },
-            secondary_attack: Attack { value: 200, effects: Effects::empty() },
-            tertiary_attack: Attack { value: 100, effects: Effects::empty() },
+            primary_attack: Attack::new_no_effects(400),
+            secondary_attack: Attack::new_no_effects(200),
+            tertiary_attack: Attack::new_no_effects(100),
         };
 
         assert_eq!(actual, expected)
