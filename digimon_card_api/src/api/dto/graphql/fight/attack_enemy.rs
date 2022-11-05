@@ -4,9 +4,9 @@ use digimon_card_core::core::domain::model::fight::effect::Effects;
 use digimon_card_core::core::domain::model::status::attack::Attack;
 use digimon_card_core::core::domain::model::status::attribute::Attribute;
 use digimon_card_core::core::domain::model::status::hit_point::HitPoint;
-use digimon_card_core::core::domain::use_case::attack::attack_enemy::{
-    AttackEnemyInput,
-    AttackEnemyOutput,
+use digimon_card_core::core::domain::use_case::attack::attack_opponent_use_case::{
+    AttackOpponentInput,
+    AttackOpponentOutput,
 };
 
 use crate::api::dto::graphql::status::hit_point::HitPoint as HitPointGraphql;
@@ -18,26 +18,26 @@ pub struct AttackEnemyRequest {
 }
 
 impl AttackEnemyRequest {
-    pub fn to_attack_enemy_input(&self) -> AttackEnemyInput {
-        AttackEnemyInput {
+    pub fn to_attack_enemy_input(&self) -> AttackOpponentInput {
+        AttackOpponentInput {
             my_attack: Attack {
                 value: self.my_attack_value,
                 effects: Effects::empty(),
             },
             my_attribute: Attribute::VACCINE,
-            enemy_hit_point: HitPoint {
+            opponent_hit_point: HitPoint {
                 value: self.enemy_hit_point_value,
                 max: 100,
                 min: 0,
             },
-            enemy_attribute: Attribute::VIRUS,
+            opponent_attribute: Attribute::VIRUS,
         }
     }
 }
 
-pub fn to_hit_point(output: AttackEnemyOutput) -> HitPointGraphql {
+pub fn to_hit_point(output: AttackOpponentOutput) -> HitPointGraphql {
     HitPointGraphql {
-        value: *&output.enemy_hit_point.value,
+        value: *&output.opponent_hit_point.value,
     }
 }
 
@@ -47,9 +47,9 @@ mod tests {
     use digimon_card_core::core::domain::model::status::attack::Attack;
     use digimon_card_core::core::domain::model::status::attribute::Attribute;
     use digimon_card_core::core::domain::model::status::hit_point::HitPoint;
-    use digimon_card_core::core::domain::use_case::attack::attack_enemy::{
-        AttackEnemyInput,
-        AttackEnemyOutput,
+    use digimon_card_core::core::domain::use_case::attack::attack_opponent_use_case::{
+        AttackOpponentInput,
+        AttackOpponentOutput,
     };
 
     use crate::api::dto::graphql::fight::attack_enemy::{AttackEnemyRequest, to_hit_point};
@@ -64,18 +64,18 @@ mod tests {
 
         let actual = source.to_attack_enemy_input();
 
-        let expected = AttackEnemyInput {
+        let expected = AttackOpponentInput {
             my_attack: Attack {
                 value: 50,
                 effects: Effects::empty(),
             },
             my_attribute: Attribute::VACCINE,
-            enemy_hit_point: HitPoint {
+            opponent_hit_point: HitPoint {
                 value: 70,
                 max: 100,
                 min: 0,
             },
-            enemy_attribute: Attribute::VIRUS,
+            opponent_attribute: Attribute::VIRUS,
         };
 
         assert_eq!(actual, expected)
@@ -83,8 +83,8 @@ mod tests {
 
     #[test]
     fn test_to_hit_point() {
-        let source = AttackEnemyOutput {
-            enemy_hit_point: HitPoint {
+        let source = AttackOpponentOutput {
+            opponent_hit_point: HitPoint {
                 value: 50,
                 max: 100,
                 min: 0,
