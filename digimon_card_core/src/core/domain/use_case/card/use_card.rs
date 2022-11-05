@@ -5,22 +5,23 @@ use crate::core::domain::model::character::digimon::Digimon;
 pub struct UseCardInput {
     pub my_card: Card,
     pub my_digimon: Digimon,
-    pub enemy_digimon: Digimon,
+    pub opponent_digimon: Digimon,
 }
 
 #[derive(Debug, PartialEq)]
 pub struct UseCardOutput {
     pub my_digimon: Digimon,
-    pub enemy_digimon: Digimon,
+    pub opponent_digimon: Digimon,
 }
 
 pub fn use_card(input: UseCardInput) -> UseCardOutput {
     let my_effects = input.my_card.get_effects();
     let my_digimon = input.my_digimon.obtain_effects(my_effects);
+    let opponent_digimon = input.opponent_digimon;
 
     UseCardOutput {
         my_digimon,
-        enemy_digimon: input.enemy_digimon,
+        opponent_digimon,
     }
 }
 
@@ -49,7 +50,7 @@ mod tests {
                 secondary_attack: Attack::value_of(200),
                 tertiary_attack: Attack::value_of(100),
             },
-            enemy_digimon: Digimon {
+            opponent_digimon: Digimon {
                 name: "ピコデビモン".to_string(),
                 attribute: Attribute::VIRUS,
                 hit_point: HitPoint {
@@ -77,7 +78,7 @@ mod tests {
                 secondary_attack: Attack::value_of(200),
                 tertiary_attack: Attack::value_of(100),
             },
-            enemy_digimon: Digimon {
+            opponent_digimon: Digimon {
                 name: "ピコデビモン".to_string(),
                 attribute: Attribute::VIRUS,
                 hit_point: HitPoint {
