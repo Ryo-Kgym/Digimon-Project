@@ -46,7 +46,7 @@ mod tests {
                 effects: Effects::empty(),
             },
             enemy_attribute: VIRUS,
-            my_hit_point: HitPoint::build(100),
+            my_hit_point: HitPoint::value_of(100),
             my_attribute: VACCINE,
         };
 

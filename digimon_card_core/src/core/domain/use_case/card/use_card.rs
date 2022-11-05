@@ -45,9 +45,9 @@ mod tests {
                     max: 500,
                     min: 0,
                 },
-                primary_attack: Attack::new_no_effects(300),
-                secondary_attack: Attack::new_no_effects(200),
-                tertiary_attack: Attack::new_no_effects(100),
+                primary_attack: Attack::value_of(300),
+                secondary_attack: Attack::value_of(200),
+                tertiary_attack: Attack::value_of(100),
             },
             enemy_digimon: Digimon {
                 name: "ピコデビモン".to_string(),
@@ -57,9 +57,9 @@ mod tests {
                     max: 500,
                     min: 0,
                 },
-                primary_attack: Attack::new_no_effects(300),
-                secondary_attack: Attack::new_no_effects(200),
-                tertiary_attack: Attack::new_no_effects(100),
+                primary_attack: Attack::value_of(300),
+                secondary_attack: Attack::value_of(200),
+                tertiary_attack: Attack::value_of(100),
             },
         };
         let actual = use_card(input);
@@ -73,9 +73,9 @@ mod tests {
                     max: 500,
                     min: 0,
                 },
-                primary_attack: Attack::new_no_effects(300),
-                secondary_attack: Attack::new_no_effects(200),
-                tertiary_attack: Attack::new_no_effects(100),
+                primary_attack: Attack::value_of(300),
+                secondary_attack: Attack::value_of(200),
+                tertiary_attack: Attack::value_of(100),
             },
             enemy_digimon: Digimon {
                 name: "ピコデビモン".to_string(),
@@ -85,9 +85,9 @@ mod tests {
                     max: 500,
                     min: 0,
                 },
-                primary_attack: Attack::new_no_effects(300),
-                secondary_attack: Attack::new_no_effects(200),
-                tertiary_attack: Attack::new_no_effects(100),
+                primary_attack: Attack::value_of(300),
+                secondary_attack: Attack::value_of(200),
+                tertiary_attack: Attack::value_of(100),
             },
         };
 
