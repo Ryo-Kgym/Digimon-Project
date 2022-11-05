@@ -2,7 +2,7 @@ use crate::core::domain::model::fight::effect::Effects;
 
 pub mod deck;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Card {
 	// アイテム
 	RecoveryFloppy,                   // 回復フロッピー

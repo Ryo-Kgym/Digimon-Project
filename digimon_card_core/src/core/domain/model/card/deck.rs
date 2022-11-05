@@ -2,17 +2,28 @@ use crate::core::domain::model::card::Card;
 
 #[derive(Debug, PartialEq)]
 pub struct Deck {
-    cards: Vec<Card>,
-    now: Option<Card>,
+    pub cards: Vec<Card>,
+    pub first: Option<Card>,
 }
 
 impl Deck {
+    pub fn new(cards: Vec<Card>) -> Self {
+        Deck {
+            cards,
+            first: None,
+        }
+    }
+
     pub fn take_out_one_card(mut self) -> Self {
         let card = self.cards.pop();
         Deck {
             cards: self.cards,
-            now: card,
+            first: card,
         }
+    }
+
+    pub fn get_first(&self) -> Option<Card> {
+        self.first.clone()
     }
 }
 
@@ -22,13 +33,33 @@ mod tests {
     use crate::core::domain::model::card::deck::Deck;
 
     #[test]
+    fn test_new() {
+        let actual = Deck::new(vec![
+            AttackPlugin,
+            RecoveryFloppy,
+            AttackPlugin,
+        ]);
+
+        let expected = Deck {
+            cards: vec![
+                AttackPlugin,
+                RecoveryFloppy,
+                AttackPlugin,
+            ],
+            first: None,
+        };
+
+        assert_eq!(actual, expected)
+    }
+
+    #[test]
     fn test_take_out_one_card() {
         let src = Deck {
             cards: vec![
                 RecoveryFloppy,
                 AttackPlugin,
             ],
-            now: Some(RecoveryFloppy),
+            first: Some(RecoveryFloppy),
         };
 
         let actual = src.take_out_one_card();
@@ -37,7 +68,7 @@ mod tests {
             cards: vec![
                 RecoveryFloppy,
             ],
-            now: Some(AttackPlugin),
+            first: Some(AttackPlugin),
         };
 
         assert_eq!(actual, expected)
@@ -47,14 +78,14 @@ mod tests {
     fn test_take_out_one_card_no_rest() {
         let src = Deck {
             cards: vec![],
-            now: Some(AttackPlugin),
+            first: Some(AttackPlugin),
         };
 
         let actual = src.take_out_one_card();
 
         let expected = Deck {
             cards: vec![],
-            now: None,
+            first: None,
         };
 
         assert_eq!(actual, expected)
