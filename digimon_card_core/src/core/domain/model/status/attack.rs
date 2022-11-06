@@ -30,6 +30,7 @@ impl Attack {
     }
 }
 
+#[derive(PartialEq, Debug)]
 pub enum AttackOrdinal {
     PRIMARY,
     SECONDARY,

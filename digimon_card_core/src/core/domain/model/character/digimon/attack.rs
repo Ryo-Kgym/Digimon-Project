@@ -4,7 +4,7 @@ use crate::core::domain::model::fight::effect::Effects;
 use crate::core::domain::model::status::attack::AttackOrdinal;
 
 impl Digimon {
-    pub fn attack(&self, attack_ordinal: AttackOrdinal, opponent_digimon: Digimon) -> Digimon {
+    pub fn attack(&self, attack_ordinal: &AttackOrdinal, opponent_digimon: &Digimon) -> Digimon {
         let attribute_effects = Effects::of(&self.attribute, &opponent_digimon.attribute);
         let damage = DamageBuilder::new()
             .attack(attack_ordinal.to_attack(&self))
@@ -13,8 +13,14 @@ impl Digimon {
 
         let opponent_hit_point = opponent_digimon.hit_point.clone().damaged(damage);
 
-        opponent_digimon
-            .hit_point(opponent_hit_point.value)
+        Digimon {
+            name: opponent_digimon.name.clone(),
+            attribute: opponent_digimon.attribute.clone(),
+            hit_point: opponent_hit_point,
+            primary_attack: opponent_digimon.primary_attack.clone(),
+            secondary_attack: opponent_digimon.secondary_attack.clone(),
+            tertiary_attack: opponent_digimon.tertiary_attack.clone()
+        }
     }
 }
 
@@ -36,8 +42,8 @@ mod tests {
             tertiary_attack: Attack::value_of(100),
         }
             .attack(
-                AttackOrdinal::SECONDARY,
-                Digimon {
+                &AttackOrdinal::SECONDARY,
+                &Digimon {
                     name: "ガブモン".to_string(),
                     attribute: Attribute::DATA,
                     hit_point: HitPoint::value_of(700),
