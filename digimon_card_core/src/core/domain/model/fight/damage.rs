@@ -71,9 +71,9 @@ mod tests {
 
         let actual = DamageBuilder::new()
             .attack(attack)
-            .effects(Effects::of(VIRUS, DATA))
+            .effects(Effects::of(&VIRUS, &DATA))
             .effects(Effects { effects: vec![Effect { effect_type: AttackPlus(20) }] })
-            .effects(Effects::of(VACCINE, VIRUS))
+            .effects(Effects::of(&VACCINE, &VIRUS))
             .build();
 
         let expected = Damage {
@@ -92,7 +92,7 @@ mod tests {
 
         let actual = DamageBuilder::new()
             .attack(attack)
-            .effects(Effects::of(VIRUS, DATA))
+            .effects(Effects::of(&VIRUS, &DATA))
             .build();
 
         let expected = Damage {
