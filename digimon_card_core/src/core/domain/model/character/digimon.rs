@@ -20,6 +20,10 @@ pub struct Digimon {
 }
 
 impl Digimon {
+    pub fn dead(&self) -> bool {
+        &self.hit_point.value == &0
+    }
+
     pub fn hit_point(self, value: i32) -> Self {
         Digimon {
             name: self.name,
@@ -44,6 +48,34 @@ mod tests {
     use crate::core::domain::model::status::attack::Attack;
     use crate::core::domain::model::status::attribute::Attribute;
     use crate::core::domain::model::status::hit_point::HitPoint;
+
+    #[test]
+    fn test_dead_true() {
+        let actual = Digimon {
+            name: "アグモン".to_string(),
+            attribute: Attribute::VACCINE,
+            hit_point: HitPoint::value_of(0),
+            primary_attack: Attack::value_of(300),
+            secondary_attack: Attack::value_of(200),
+            tertiary_attack: Attack::value_of(100),
+        }.dead();
+
+        assert!(actual)
+    }
+
+    #[test]
+    fn test_dead_false() {
+        let actual = Digimon {
+            name: "アグモン".to_string(),
+            attribute: Attribute::VACCINE,
+            hit_point: HitPoint::value_of(1),
+            primary_attack: Attack::value_of(300),
+            secondary_attack: Attack::value_of(200),
+            tertiary_attack: Attack::value_of(100),
+        }.dead();
+
+        assert!(!actual)
+    }
 
     #[test]
     fn test_hit_point() {
