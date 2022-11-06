@@ -3,13 +3,13 @@ use crate::core::domain::model::fight::effect::EffectType::AttackMultiply;
 use crate::core::domain::model::status::attribute::Attribute;
 
 impl Effects {
-    pub fn of(my_attribute: Attribute,
-              enemy_attribute: Attribute) -> Self {
+    pub fn of(my_attribute: &Attribute,
+              enemy_attribute: &Attribute) -> Self {
         let mut magnification = 1.0;
 
-        if my_attribute.advantage() == enemy_attribute {
+        if &my_attribute.advantage() == enemy_attribute {
             magnification = 2.0;
-        } else if my_attribute.disadvantage() == enemy_attribute {
+        } else if &my_attribute.disadvantage() == enemy_attribute {
             magnification = 0.5;
         }
 
@@ -30,7 +30,7 @@ mod tests {
     #[test]
     fn test_against_advantage() {
         let actual = Effects::of(
-            VACCINE, VIRUS,
+            &VACCINE, &VIRUS,
         );
         let expected = Effects {
             effects: vec![Effect {
@@ -44,7 +44,7 @@ mod tests {
     #[test]
     fn test_against_disadvantage() {
         let actual = Effects::of(
-            VACCINE, DATA,
+            &VACCINE, &DATA,
         );
         let expected = Effects {
             effects: vec![Effect {
@@ -58,7 +58,7 @@ mod tests {
     #[test]
     fn test_against_else() {
         let actual = Effects::of(
-            VACCINE, VACCINE,
+            &VACCINE, &VACCINE,
         );
         let expected = Effects {
             effects: vec![Effect {

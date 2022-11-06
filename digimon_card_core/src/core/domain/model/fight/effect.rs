@@ -56,8 +56,8 @@ mod tests {
 
     #[test]
     fn test_append() {
-        let actual = Effects::of(VACCINE, VIRUS)
-            .append(Effects::of(DATA, VIRUS));
+        let actual = Effects::of(&VACCINE, &VIRUS)
+            .append(Effects::of(&DATA, &VIRUS));
         let expected = Effects {
             effects: vec![
                 Effect {
