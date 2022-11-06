@@ -19,6 +19,14 @@ impl HitPoint {
         }
     }
 
+    pub fn value(self, value: i32) -> Self {
+        HitPoint {
+            value,
+            max: self.max,
+            min: self.min,
+        }
+    }
+
     pub fn damaged(self, damage: Damage) -> Self {
         HitPoint {
             value: (self.value - damage.value).max(MIN_VALUE),
@@ -48,6 +56,19 @@ mod tests {
         let expected = HitPoint {
             value: 100,
             max: 100,
+            min: 0,
+        };
+
+        assert_eq!(actual, expected)
+    }
+
+    #[test]
+    fn test_value() {
+        let actual = HitPoint::value_of(1000)
+            .value(500);
+        let expected = HitPoint {
+            value: 500,
+            max: 1000,
             min: 0,
         };
 
