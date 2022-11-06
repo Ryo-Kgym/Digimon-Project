@@ -20,6 +20,17 @@ pub struct Digimon {
 }
 
 impl Digimon {
+    pub fn hit_point(self, value: i32) -> Self {
+        Digimon {
+            name: self.name,
+            attribute: self.attribute,
+            hit_point: self.hit_point.value(value),
+            primary_attack: self.primary_attack,
+            secondary_attack: self.secondary_attack,
+            tertiary_attack: self.tertiary_attack,
+        }
+    }
+
     pub fn obtain_effects(self, effects: Effects) -> Self {
         allocate_effects(self, effects)
     }
@@ -33,6 +44,33 @@ mod tests {
     use crate::core::domain::model::status::attack::Attack;
     use crate::core::domain::model::status::attribute::Attribute;
     use crate::core::domain::model::status::hit_point::HitPoint;
+
+    #[test]
+    fn test_hit_point() {
+        let actual = Digimon {
+            name: "アグモン".to_string(),
+            attribute: Attribute::VACCINE,
+            hit_point: HitPoint::value_of(600),
+            primary_attack: Attack::value_of(300),
+            secondary_attack: Attack::value_of(200),
+            tertiary_attack: Attack::value_of(100),
+        }.hit_point(200);
+
+        let expected = Digimon {
+            name: "アグモン".to_string(),
+            attribute: Attribute::VACCINE,
+            hit_point: HitPoint {
+                value: 200,
+                max: 600,
+                min: 0,
+            },
+            primary_attack: Attack::value_of(300),
+            secondary_attack: Attack::value_of(200),
+            tertiary_attack: Attack::value_of(100),
+        };
+
+        assert_eq!(actual, expected)
+    }
 
     // AttackMultiply
     // RecoveryType
