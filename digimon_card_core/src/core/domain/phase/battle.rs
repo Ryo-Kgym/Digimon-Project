@@ -111,4 +111,17 @@ mod tests {
             opponent_option_card: Card::RecoveryFloppy,
         });
     }
+
+    #[test]
+    #[should_panic]
+    fn error_opponent_digimon_card() {
+        let _actual = battle(BattleInput {
+            my_digimon_card: Card::AguMon,
+            my_hit_point_value: 590,
+            my_option_card: Card::AttackPlugin,
+            opponent_digimon_card: Card::RecoveryFloppy,
+            opponent_hit_point_value: 500,
+            opponent_option_card: Card::RecoveryFloppy,
+        });
+    }
 }
